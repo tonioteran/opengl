@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11  -rdynamic CMakeFiles/testIncludeLibraries.dir/testIncludeLibraries.cpp.o  -o ../bin/testIncludeLibraries  -L/home/tonio/Documents/opengl/lib 

@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tonio/Documents/opengl/tests/testIncludeLibraries.cpp
+iostream
+-
+GLFW/glfw3.h
+-
+glad/glad.h
+-
+

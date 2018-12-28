@@ -1,6 +1,0 @@
-/home/tonio/Documents/opengl/build/CMakeFiles/rebuild_cache.dir
-/home/tonio/Documents/opengl/build/CMakeFiles/edit_cache.dir
-/home/tonio/Documents/opengl/build/tests/CMakeFiles/rebuild_cache.dir
-/home/tonio/Documents/opengl/build/tests/CMakeFiles/edit_cache.dir
-/home/tonio/Documents/opengl/build/tests/CMakeFiles/testHelloWorld.dir
-/home/tonio/Documents/opengl/build/tests/CMakeFiles/testIncludeLibraries.dir

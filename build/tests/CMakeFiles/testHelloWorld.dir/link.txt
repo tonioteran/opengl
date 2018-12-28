@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++11  -rdynamic CMakeFiles/testHelloWorld.dir/testHelloWorld.cpp.o  -o ../bin/testHelloWorld  -L/home/tonio/Documents/opengl/lib 

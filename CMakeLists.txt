@@ -15,6 +15,10 @@ find_package ( GLFW3 REQUIRED )
 find_package ( OpenGL REQUIRED )
 find_package ( X11 REQUIRED )
 
+#set (TESTS_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+#set (SOURCES "${TESTS_SRC_DIR}/*.cpp")
+include_directories ( ~/Documents/glad/include )
+
 include_directories ( tests )
 add_subdirectory ( tests )
 

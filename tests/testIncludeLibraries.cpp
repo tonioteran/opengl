@@ -7,12 +7,12 @@
 
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
+//#include <glad/glad.h>
 
 
 int main(void) {
 
-  std::cout << "Hello OpenGL World!" << std::endl;
+  std::cout << "Hello Include OpenGL libraries World!" << std::endl;
 
   return (0);
 

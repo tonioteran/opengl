@@ -10,4 +10,8 @@ add_executable(testHelloWindow testHelloWindow.cpp)
 target_link_libraries(testHelloWindow glfw "${GLFW_LIBRARIES}"
     ${LIBS})
 
+add_executable(testHelloTriangle testHelloTriangle.cpp)
+target_link_libraries(testHelloTriangle glfw "${GLFW_LIBRARIES}"
+    ${LIBS})
+
 

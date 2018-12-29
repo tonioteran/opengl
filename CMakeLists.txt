@@ -4,7 +4,8 @@ cmake_policy (VERSION 2.8)
 project ( LearnOpenGL )
 
 # Custom FindXXX.cmake modules
-set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} 
+    "${CMAKE_SOURCE_DIR}/cmake/modules")
 
 link_directories ( ${CMAKE_SOURCE_DIR}/lib )
 
@@ -17,7 +18,13 @@ find_package ( X11 REQUIRED )
 
 #set (TESTS_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 #set (SOURCES "${TESTS_SRC_DIR}/*.cpp")
-include_directories ( ~/Documents/glad/include )
+set ( CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl" )
+
+add_library (GLAD "src/glad.c")
+
+include_directories ( ${CMAKE_SOURCE_DIR}/includes )
+
+set ( LIBS ${LIBS} GLAD )
 
 include_directories ( tests )
 add_subdirectory ( tests )

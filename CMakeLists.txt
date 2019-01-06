@@ -21,9 +21,7 @@ find_package ( X11 REQUIRED )
 set ( CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl" )
 
 add_library (GLAD "src/glad.c")
-
 include_directories ( ${CMAKE_SOURCE_DIR}/includes )
-
 set ( LIBS ${LIBS} GLAD )
 
 include_directories ( tests )

@@ -7,7 +7,6 @@
 
 #include <iostream>
 
-
 int main(void) {
 
   std::cout << "Hello OpenGL World!" << std::endl;

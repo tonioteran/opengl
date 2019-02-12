@@ -47,8 +47,10 @@ int main(void) {
   }
 
   // load shaders from source file
-  Shader ourShader("/home/tonio/repos/opengl/apps/triangle.vs",
-                   "/home/tonio/repos/opengl/apps/triangle.fs");
+  // Shader ourShader("/home/tonio/repos/opengl/apps/triangle.vs",
+  //                  "/home/tonio/repos/opengl/apps/triangle.fs");
+  Shader ourShader("/home/tonio/repos/opengl/apps/3.3.shader.vs",
+                   "/home/tonio/repos/opengl/apps/3.3.shader.fs");
 
   // setup vertex data
   float vertices[] = {

@@ -3,13 +3,13 @@ cmake_minimum_required(VERSION 3.12)
 
 set(MY_TESTS
     testHelloWorld;
-    testIncludeLibraries;)
-    #testHelloWindow;
-    #testHelloTriangle)
+    testIncludeLibraries;
+    testHelloWindow;
+    testHelloTriangle)
 
 foreach(my_test IN LISTS MY_TESTS)
     add_executable(${my_test} "${my_test}.cpp")
-    target_link_libraries(${my_test} PUBLIC OpenGL ${GLFW_LIBRARIES})
+    target_link_libraries(${my_test} PUBLIC OpenGL ${GLFW_LIBRARIES} ${LIBS} -lglfw -ldl)
 endforeach(my_test)
 
 #add_executable(testHelloWorld testHelloWorld.cpp)

@@ -106,10 +106,12 @@ int main(void) {
   glGenBuffers(2, VBO);
 
   // -- bind vertex array first, then bind and set vertex buffers
+  // first configure the vertex array object so that the configuration
+  // calls only need to be called once!!!
+  /** VAO[0] config!!!! */
   glBindVertexArray(VAO[0]);
   glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
   // -- configure vertex attributes
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
@@ -130,10 +132,10 @@ int main(void) {
 
     // -- draw triangle
     glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
+    glBindVertexArray(VAO[0]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glBindVertexArray(0); // unbind 
+    glBindVertexArray(0); // unbind
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -141,8 +143,8 @@ int main(void) {
   }
 
   // -- deallocate resources
-  glDeleteVertexArrays(1, &VAO);
-  glDeleteBuffers(1, &VBO);
+  glDeleteVertexArrays(1, &VAO[0]);
+  glDeleteBuffers(1, &VBO[0]);
 
   glfwTerminate();
 

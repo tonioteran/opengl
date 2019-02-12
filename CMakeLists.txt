@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(learnOpenGL)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)

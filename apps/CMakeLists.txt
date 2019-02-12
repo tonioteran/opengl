@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.12)
 
-add_executable(drawTriangles drawTriangles.cpp)
-target_link_libraries(drawTriangles PUBLIC OpenGL glad glfw)
-target_include_directories(drawTriangles PUBLIC "${GLAD_INCLUDE_DIR}")
+set(MY_TESTS
+  drawTriangles;
+  maxVertexAttribs)
+
+foreach(my_test IN LISTS MY_TESTS)
+  add_executable("${my_test}" "${my_test}.cpp")
+  target_link_libraries("${my_test}" PUBLIC OpenGL glad glfw)
+  target_include_directories("${my_test}" PUBLIC "${GLAD_INCLUDE_DIR}")
+endforeach(my_test)
+
+# add_executable(drawTriangles drawTriangles.cpp)
+# target_link_libraries(drawTriangles PUBLIC OpenGL glad glfw)
+# target_include_directories(drawTriangles PUBLIC "${GLAD_INCLUDE_DIR}")

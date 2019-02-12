@@ -87,16 +87,51 @@ int main(void) {
   glGenVertexArrays(num_elems, VAO);
   glGenBuffers(num_elems, VBO);
 
+  // configure the array objects
+  for (int i = 0; i < num_elems; i++) {
+    glBindVertexArray(VAO[i]);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    // point to the corresponding vertices:
+    int offset = i*3;
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float),
+                          (void*)(offset* sizeof(float)));
+    glEnableVertexAttribArray(0);
+  }
 
+  // draw in wireframe mode:
+  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+  // render loop:
+  while (!glfwWindowShouldClose(window)) {
+    // input
+    processInput(window);
 
+    //render
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    glUseProgram(shaderProgram);
+    // draw triangles:
+    for (int i = 0; i < num_elems; i++) {
+      glBindVertexArray(VAO[i]);
+      glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
 
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 
+  }
 
+  glDeleteVertexArrays(2, VAO);
+  glDeleteBuffers(2, VBO);
 
-
-
+  glfwTerminate();
   return (0);
 
+}
+
+void processInput(GLFWwindow *window) {
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, true);
 }

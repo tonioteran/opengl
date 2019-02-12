@@ -11,26 +11,14 @@
 
 #include "Shader.h"
 
+#define str(s) #s
+
 /* function declarations */
 void processInput(GLFWwindow *window);
 
 /* settings */
 const unsigned int SCR_WIDTH  = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-/* shaders */
-const char *vertexShaderSource = 
-  "#version 330 core\n"
-  "layout (location = 0) in vec3 aPos;\n"
-  "void main() {\n"
-  "  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-  "}\0";
-const char *fragmentShaderSource = 
-  "#version 330 core\n"
-  "out vec4 FragColor;\n"
-  "void main() {\n"
-  "  FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-  "}\n\0";
 
 int main(void) {
 
@@ -58,25 +46,9 @@ int main(void) {
     return (-1);
   }
 
-  // build and compile custom shaders
-  int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-  glCompileShader(vertexShader);
-  int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-  glCompileShader(fragmentShader);
-
-  // link shaders
-  int shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
-  glLinkProgram(shaderProgram);
-  glDeleteShader(vertexShader); glDeleteShader(fragmentShader); // del after use
-
   // load shaders from source file
-  // Shader ourShader("triangle.vs", "triangle.fs");
-  // Shader ourShader("3.3.shader.vs", "3.3.shader.fs");
-  Shader ourShader("fake.vs", "fake.fs");
+  Shader ourShader("/home/tonio/repos/opengl/apps/triangle.vs",
+                   "/home/tonio/repos/opengl/apps/triangle.fs");
 
   // setup vertex data
   float vertices[] = {
@@ -118,7 +90,6 @@ int main(void) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // glUseProgram(shaderProgram);
     ourShader.use();
     // draw triangles:
     for (int i = 0; i < num_elems; i++) {

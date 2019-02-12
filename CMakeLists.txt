@@ -13,6 +13,8 @@ target_include_directories("glad" PRIVATE "${GLAD_INCLUDE_DIR}")
 
 set(NAVVIZ_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/includes/")
 
+add_definitions( -DREPO_DIR_PATH=${CMAKE_CURRENT_SOURCE_DIR} )
+
 add_subdirectory(apps)
 
 

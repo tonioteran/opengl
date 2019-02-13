@@ -1,6 +1,6 @@
 /**
- * @file projectionDemo.cpp
- * @brief demo that shows how to apply view transforms to objects
+ * @file cameraDemo.cpp
+ * @brief fully working demo for OpenGL
  * @date Feb 12, 2019
  * @author Antonio Teran (teran@mit.edu)
  */
@@ -9,16 +9,32 @@
 #include <GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include "Shader.h"
+#include "Camera.h"
 
 void processInput(GLFWwindow *window);
+void mouse_callback(GLFWwindow *window, double xpos, double ypos);
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+// void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 const unsigned int SCR_WIDTH  = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+// camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = SCR_WIDTH / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f;
+bool firstMouse = true;
+
+// timing
+float deltaTime = 0.0f; // time between curr and last frame
+float lastFrame = 0.0f;
 
 int main(void) {
 

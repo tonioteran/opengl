@@ -6,6 +6,7 @@ set(MY_TESTS
   texturesDemo;
   transformDemo;
   projectionDemo;
+  cameraDemo;
   maxVertexAttribs)
 
 foreach(my_test IN LISTS MY_TESTS)

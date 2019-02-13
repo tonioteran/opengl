@@ -46,6 +46,9 @@ int main(void) {
     return (-1);
   }
 
+  // enable z-buffer:
+  glEnable(GL_DEPTH_TEST);
+
   // load shaders from source file
   Shader ourShader("/home/tonio/repos/opengl/apps/projectionShader.vs",
                    "/home/tonio/repos/opengl/apps/transformShader.fs");
@@ -181,7 +184,7 @@ int main(void) {
 
     //render
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // bind textures on corresponding texture units
     glActiveTexture(GL_TEXTURE0);

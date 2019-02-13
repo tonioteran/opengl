@@ -55,6 +55,11 @@ int main(void) {
     return (-1);
   }
   glfwMakeContextCurrent(window);
+  glfwSetCursorPosCallback(window, mouse_callback);
+  glfwSetScrollCallback(window, scroll_callback);
+
+  // tell GLFW to capture our mouse
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   // load OpenGL function pointers
   if ( !gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) ) {
@@ -115,24 +120,15 @@ int main(void) {
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
   };
 
-  unsigned int indices[] = {
-    0, 1, 3, // first triangle
-    1, 2, 3  // second triangle
-  };
-
   // generate buffer and arrays for the 2 triangles (one square)
-  unsigned int VBO, VAO, EBO;
+  unsigned int VBO, VAO;
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
-  glGenBuffers(1, &EBO);
 
   glBindVertexArray(VAO);
 
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
   // position attribute
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
@@ -208,6 +204,12 @@ int main(void) {
 
   // render loop:
   while (!glfwWindowShouldClose(window)) {
+
+    // time logic:
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
     // input
     processInput(window);
 
@@ -230,8 +232,7 @@ int main(void) {
     transform = glm::rotate(transform, (float)glfwGetTime(),
                             glm::vec3(0.0f, 0.0f, 1.0f));
 
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    glm::mat4 view = camera.GetViewMatrix();
 
     glm::mat4 projection;
     projection = glm::perspective(glm::radians(45.0f),
@@ -268,7 +269,6 @@ int main(void) {
 
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
-  glDeleteBuffers(1, &EBO);
 
   glfwTerminate();
   return (0);
@@ -278,4 +278,30 @@ int main(void) {
 void processInput(GLFWwindow *window) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     glfwSetWindowShouldClose(window, true);
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    camera.ProcessKeyboard(FORWARD, deltaTime);
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    camera.ProcessKeyboard(BACKWARD, deltaTime);
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    camera.ProcessKeyboard(LEFT, deltaTime);
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    camera.ProcessKeyboard(RIGHT, deltaTime);
+}
+
+void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
+  if (firstMouse) {
+    lastX = xpos;
+    lastY = ypos;
+    firstMouse = false;
+  }
+  float xoffset = xpos - lastX;
+  float yoffset = lastY - ypos;
+  lastX = xpos;
+  lastY = ypos;
+
+  camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
+  camera.ProcessMouseScroll(yoffset);
 }

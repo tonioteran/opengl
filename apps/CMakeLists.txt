@@ -5,6 +5,7 @@ set(MY_TESTS
   drawTrianglesShader;
   texturesDemo;
   transformDemo;
+  projectionDemo;
   maxVertexAttribs)
 
 foreach(my_test IN LISTS MY_TESTS)
